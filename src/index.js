@@ -1,0 +1,1 @@
+export { default as Writer } from './components/Writer.vue';
