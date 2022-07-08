@@ -23,11 +23,11 @@
     "module": "dist/index.esm.js",
     "source": "src/index.js",
     "dependencies": {
-        "highlight.js": "^11.5.1",
-        "markdown-it": "^13.0.1"
+        "markdown-it": "^13.0.1",
+        "prismjs": "^1.28.0"
     },
     "peerDependencies": {
-        "vue": "^3.2.33"
+        "vue": "^3.0.0"
     },
     "devDependencies": {
         "@vue/test-utils": "^2.0.0-rc.18",
