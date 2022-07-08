@@ -9,9 +9,15 @@
     <img src="https://img.shields.io/npm/l/@lumeno/writer.svg" alt="License" />
 </p>
 
+# Update badges
+
 # Writer
 
 TBD.
+
+## Installation
+
+A UMD build is provided, but it is untested. In most cases, you should use the modern ES build.
 
 ## Promo
 
