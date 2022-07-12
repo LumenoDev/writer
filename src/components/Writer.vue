@@ -11,13 +11,42 @@
             <div class="toolbar-left flex justify-start"
                  :class="editing ? '' : 'invisible pointer-events-none'">
 
+                <!-- Undo -->
+                <div title="Undo"
+                     @click="history.hasUndo() ? history.undo() : null"
+                     class="toolbar-button toolbar-button-undo flex items-center cursor-pointer max-w-[40px] p-3 group">
+
+                    <!-- Icon -->
+                    <svg class="h-[16px] fill-current transition duration-300" viewBox="0 0 512 512"
+                         :class="history.hasUndo() ? 'text-black group-hover:text-sky-700' : 'text-gray-300'">
+                        <path d="m480 256c0 123.4-100.5 223.9-223.9 223.9-48.84 0-95.17-15.58-134.2-44.86-14.12-10.59-16.97-30.66-6.375-44.81 10.59-14.12 30.62-16.94 44.81-6.375 27.84 20.91 61 31.94 95.88 31.94 88.085.005 159.785-71.695 159.785-159.795s-71.69-159.8-159.8-159.8c-37.46 0-73.09 13.49-101.3 36.64l45.12 45.14c17.01 17.02 4.955 46.1-19.1 46.1h-145.75c-10.59.02-19.17-8.58-19.17-19.18v-145.86c0-24.04 29.07-36.08 46.07-19.07l47.6 47.63c40.23-34.89 91.83-55.49 146.43-55.49 123.4 0 223.9 100.49 223.9 223.89z"/>
+                    </svg>
+
+                </div>
+
+                <!-- Redo -->
+                <div title="Redo"
+                     @click="history.hasRedo() ? history.redo() : null"
+                     class="toolbar-button toolbar-button-redo flex items-center cursor-pointer max-w-[40px] p-3 group">
+
+                    <!-- Icon -->
+                    <svg class="h-[16px] fill-current transition duration-300" viewBox="0 0 512 512"
+                         :class="history.hasRedo() ? 'text-black group-hover:text-sky-700' : 'text-gray-300'">
+                        <path d="m468.9 32.11c13.87 0 27.18 10.77 27.18 27.04v145.9c0 10.59-8.584 19.17-19.17 19.17h-145.7c-16.28 0-27.06-13.32-27.06-27.2 0-6.634 2.461-13.4 7.96-18.9l45.12-45.14c-28.22-23.14-63.85-36.64-101.3-36.64-88.09 0-159.8 71.69-159.8 159.8s71.67 159.76 159.77 159.76c73.14 0 89.44-38.31 115.1-38.31 18.48 0 31.97 15.04 31.97 31.96 0 35.04-81.59 70.41-147 70.41-123.4 0-223.9-100.5-223.9-223.9s100.53-223.62 223.93-223.62c54.6 0 106.2 20.39 146.4 55.26l47.6-47.63c5.5-5.5 12.3-7.96 18.9-7.96z"/>
+                    </svg>
+
+                </div>
+
+                <!-- Divider -->
+                <div class="toolbar-divider border-l border-gray-300/70 mx-3"></div>
+
                 <!-- Heading #1 -->
                 <div title="Heading #1"
                      @click="insertText('# ')"
-                     class="toolbar-button toolbar-button-heading toolbar-button-heading-one flex items-center cursor-pointer p-3 group">
+                     class="toolbar-button toolbar-button-heading toolbar-button-heading-one flex items-center cursor-pointer max-w-[50px] p-3 group">
 
                     <!-- Icon -->
-                    <svg class="h-[16px] fill-current transition duration-300 text-black group-hover:text-sky-700" viewBox="0 0 448 512">
+                    <svg class="h-[16px] min-w-[16px] fill-current transition duration-300 text-black group-hover:text-sky-700" viewBox="0 0 448 512">
                         <path d="m448 448c0 17.69-14.33 32-32 32h-96c-17.67 0-32-14.31-32-32s14.33-32 32-32h16v-144h-224v144h16c17.67 0 32 14.31 32 32s-14.33 32-32 32h-96c-17.67 0-32-14.31-32-32s14.33-32 32-32h16v-320h-16c-17.67 0-32-14.31-32-32s14.33-32 32-32h96c17.67 0 32 14.31 32 32s-14.33 32-32 32h-16v112h224v-112h-16c-17.67 0-32-14.31-32-32s14.33-32 32-32h96c17.67 0 32 14.31 32 32s-14.33 32-32 32h-16v320h16c17.7 0 32 14.3 32 32z"/>
                     </svg>
 
@@ -31,10 +60,10 @@
                 <!-- Heading #2 -->
                 <div title="Heading #2"
                      @click="insertText('## ')"
-                     class="toolbar-button toolbar-button-heading toolbar-button-heading-two flex items-center cursor-pointer p-3 group">
+                     class="toolbar-button toolbar-button-heading toolbar-button-heading-two flex items-center cursor-pointer max-w-[50px] p-3 group">
 
                     <!-- Icon -->
-                    <svg class="h-[16px] fill-current transition duration-300 text-black group-hover:text-sky-700" viewBox="0 0 448 512">
+                    <svg class="h-[16px] min-w-[16px] fill-current transition duration-300 text-black group-hover:text-sky-700" viewBox="0 0 448 512">
                         <path d="m448 448c0 17.69-14.33 32-32 32h-96c-17.67 0-32-14.31-32-32s14.33-32 32-32h16v-144h-224v144h16c17.67 0 32 14.31 32 32s-14.33 32-32 32h-96c-17.67 0-32-14.31-32-32s14.33-32 32-32h16v-320h-16c-17.67 0-32-14.31-32-32s14.33-32 32-32h96c17.67 0 32 14.31 32 32s-14.33 32-32 32h-16v112h224v-112h-16c-17.67 0-32-14.31-32-32s14.33-32 32-32h96c17.67 0 32 14.31 32 32s-14.33 32-32 32h-16v320h16c17.7 0 32 14.3 32 32z"/>
                     </svg>
 
@@ -48,10 +77,10 @@
                 <!-- Heading #3 -->
                 <div title="Heading #3"
                      @click="insertText('### ')"
-                     class="toolbar-button toolbar-button-heading toolbar-button-heading-three flex items-center cursor-pointer p-3 group">
+                     class="toolbar-button toolbar-button-heading toolbar-button-heading-three flex items-center cursor-pointer max-w-[50px] p-3 group">
 
                     <!-- Icon -->
-                    <svg class="h-[16px] fill-current transition duration-300 text-black group-hover:text-sky-700" viewBox="0 0 448 512">
+                    <svg class="h-[16px] min-w-[16px] fill-current transition duration-300 text-black group-hover:text-sky-700" viewBox="0 0 448 512">
                         <path d="m448 448c0 17.69-14.33 32-32 32h-96c-17.67 0-32-14.31-32-32s14.33-32 32-32h16v-144h-224v144h16c17.67 0 32 14.31 32 32s-14.33 32-32 32h-96c-17.67 0-32-14.31-32-32s14.33-32 32-32h16v-320h-16c-17.67 0-32-14.31-32-32s14.33-32 32-32h96c17.67 0 32 14.31 32 32s-14.33 32-32 32h-16v112h224v-112h-16c-17.67 0-32-14.31-32-32s14.33-32 32-32h96c17.67 0 32 14.31 32 32s-14.33 32-32 32h-16v320h16c17.7 0 32 14.3 32 32z"/>
                     </svg>
 
@@ -67,7 +96,7 @@
 
                 <!-- Bold -->
                 <div title="Bold"
-                     class="toolbar-button toolbar-button-bold flex items-center cursor-pointer p-3 group">
+                     class="toolbar-button toolbar-button-bold flex items-center cursor-pointer max-w-[40px] p-3 group">
 
                     <!-- Icon -->
                     <svg class="h-[16px] fill-current transition duration-300 text-black group-hover:text-sky-700" viewBox="0 0 384 512">
@@ -78,7 +107,7 @@
 
                 <!-- Italic -->
                 <div title="Italic"
-                     class="toolbar-button toolbar-button-italic flex items-center cursor-pointer p-3 group">
+                     class="toolbar-button toolbar-button-italic flex items-center cursor-pointer max-w-[40px] p-3 group">
 
                     <!-- Icon -->
                     <svg class="h-[16px] fill-current transition duration-300 text-black group-hover:text-sky-700" viewBox="0 0 384 512">
@@ -89,7 +118,7 @@
 
                 <!-- List -->
                 <div title="List"
-                     class="toolbar-button toolbar-button-list flex items-center cursor-pointer p-3 group">
+                     class="toolbar-button toolbar-button-list flex items-center cursor-pointer max-w-[40px] p-3 group">
 
                     <!-- Icon -->
                     <svg class="h-[16px] fill-current transition duration-300 text-black group-hover:text-sky-700" viewBox="0 0 512 512">
@@ -103,7 +132,7 @@
 
                 <!-- Blockquote -->
                 <div title="Blockquote"
-                     class="toolbar-button toolbar-button-blockquote flex items-center cursor-pointer p-3 group">
+                     class="toolbar-button toolbar-button-blockquote flex items-center cursor-pointer max-w-[40px] p-3 group">
 
                     <!-- Icon -->
                     <svg class="h-[16px] fill-current transition duration-300 text-gray-400 group-hover:text-sky-700" viewBox="0 0 448 512">
@@ -114,7 +143,7 @@
 
                 <!-- Code -->
                 <div title="Code"
-                     class="toolbar-button toolbar-button-code flex items-center cursor-pointer p-3 group">
+                     class="toolbar-button toolbar-button-code flex items-center cursor-pointer max-w-[40px] p-3 group">
 
                     <!-- Icon -->
                     <svg class="h-[16px] fill-current transition duration-300 text-emerald-600 group-hover:text-emerald-700" viewBox="0 0 640 512">
@@ -125,7 +154,7 @@
 
                 <!-- Link -->
                 <div title="Insert Link"
-                     class="toolbar-button toolbar-button-link flex items-center cursor-pointer p-3 group">
+                     class="toolbar-button toolbar-button-link flex items-center cursor-pointer max-w-[40px] p-3 group">
 
                     <!-- Icon -->
                     <svg class="h-[16px] fill-current transition duration-300 text-sky-600 group-hover:text-sky-700" viewBox="0 0 640 512">
@@ -136,7 +165,7 @@
 
                 <!-- Image -->
                 <div title="Upload Image"
-                     class="toolbar-button toolbar-button-image flex items-center cursor-pointer p-3 group">
+                     class="toolbar-button toolbar-button-image flex items-center cursor-pointer max-w-[40px] p-3 group">
 
                     <!-- Icon -->
                     <svg class="h-[16px] fill-current transition duration-300 text-purple-700/60 group-hover:text-purple-800" viewBox="0 0 512 512">
@@ -159,7 +188,7 @@
                 <div title="Edit"
                      v-if="! editing"
                      @click="editing = true"
-                     class="toolbar-button toolbar-button-edit flex items-center cursor-pointer p-3 group">
+                     class="toolbar-button toolbar-button-edit flex items-center cursor-pointer max-w-[40px] p-3 group">
 
                     <!-- Icon -->
                     <svg class="h-[16px] fill-current transition duration-300 text-sky-600 group-hover:text-sky-800" viewBox="0 0 512 512">
@@ -172,7 +201,7 @@
                 <div v-if="editing"
                      title="Preview HTML"
                      @click="editing = false"
-                     class="toolbar-button toolbar-button-preview flex items-center cursor-pointer p-3 group">
+                     class="toolbar-button toolbar-button-preview flex items-center cursor-pointer max-w-[40px] p-3 group">
 
                     <!-- Icon -->
                     <svg class="h-[16px] fill-current transition duration-300 text-emerald-600 group-hover:text-emerald-800" viewBox="0 0 576 512">
@@ -185,7 +214,7 @@
                 <div title="Fullscreen"
                      v-if="! fullscreen"
                      @click="fullScreenMode()"
-                     class="toolbar-button toolbar-button-fullscreen flex items-center cursor-pointer p-3 group">
+                     class="toolbar-button toolbar-button-fullscreen flex items-center cursor-pointer max-w-[40px] p-3 group">
 
                     <!-- Icon -->
                     <svg class="h-[16px] fill-current transition duration-300 text-gray-500 group-hover:text-gray-800" viewBox="0 0 512 512">
@@ -198,7 +227,7 @@
                 <div v-if="fullscreen"
                      @click="compactMode()"
                      title="Exit Fullscreen"
-                     class="toolbar-button toolbar-button-compact flex items-center cursor-pointer p-3 group">
+                     class="toolbar-button toolbar-button-compact flex items-center cursor-pointer max-w-[40px] p-3 group">
 
                     <!-- Icon -->
                     <svg class="h-[16px] fill-current transition duration-300 text-gray-500 group-hover:text-gray-800" viewBox="0 0 512 512">
@@ -222,6 +251,7 @@
                       :value="modelValue"
                       :placeholder="placeholder"
                       @input="change($event.target.value)"
+                      @keydown="interceptKeystroke($event)"
                       @focusout="saveSelectionRange($event.target)"
                       class="editor appearance-none outline-none focus:outline-none active:outline-none bg-inherit w-full text-gray-900 resize-none font-mono p-6">
             </textarea>
@@ -241,6 +271,8 @@
 
 <!-- Script -->
 <script>
+import UndoManager from 'undo-manager';
+
 export default
 {
     /**
@@ -248,6 +280,7 @@ export default
      *
      */
     data() { return {
+        history    : new UndoManager(),
         editing    : true,
         fullscreen : false,
 
@@ -262,7 +295,6 @@ export default
      *
      */
     emits : [
-        'change',
         'update:modelValue',
     ],
 
@@ -272,8 +304,18 @@ export default
      */
     props : {
         'height'      : { type : Number, default : 200 },
+        'maxUndo'     : { type : Number, default : 20 },
         'modelValue'  : { type : String, default : '' },
         'placeholder' : { type : String, default : 'Write something amazing...' },
+    },
+
+    /**
+     * Execute actions when the component is instantiated.
+     *
+     */
+    created()
+    {
+        this.history.setLimit(this.maxUndo);
     },
 
     /**
@@ -286,14 +328,13 @@ export default
          * Set the component's value.
          *
          */
-        change(payload = undefined)
+        change(content = undefined)
         {
-            if (payload === undefined) return;
+            if (content === undefined) return;
 
-            this.resizeEditorToContent();
+            this.logHistoryState(this.modelValue, content);
 
-            this.$emit('change', payload);
-            this.$emit('update:modelValue', payload);
+            this.update(content);
         },
 
         /**
@@ -319,6 +360,41 @@ export default
         },
 
         /**
+         * Intercept certain keyboard events and handle them accordingly.
+         *
+         */
+        interceptKeystroke(event)
+        {
+            // Undo
+            if (event.keyCode === 90 && ! event.shiftKey && this.history.hasUndo()) {
+                event.preventDefault();
+
+                this.history.undo();
+            }
+
+            // Redo
+            if ((event.keyCode === 89 || (event.keyCode === 90 && event.shiftKey)) && this.history.hasRedo()) {
+                event.preventDefault();
+
+                this.history.redo();
+            }
+        },
+
+        /**
+         * Record the given content within the history.
+         *
+         */
+        logHistoryState(current, revised)
+        {
+            if (current === revised) return;
+
+            this.history.add({
+                undo : () => this.update(current),
+                redo : () => this.update(revised),
+            });
+        },
+
+        /**
          * Store the current cursor selection range.
          *
          */
@@ -339,6 +415,17 @@ export default
             if (this.fullscreen) return;
 
             this.$refs.editor.style.height = `${this.$refs.editor.scrollHeight}px`;
+        },
+
+        /**
+         * Update the current height and content of the component.
+         *
+         */
+        update(content)
+        {
+            this.resizeEditorToContent();
+
+            this.$emit('update:modelValue', content);
         },
     }
 }

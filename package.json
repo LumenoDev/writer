@@ -34,7 +34,8 @@
     },
     "dependencies": {
         "markdown-it": "^13.0.1",
-        "prismjs": "^1.28.0"
+        "prismjs": "^1.28.0",
+        "undo-manager": "^1.0.5"
     },
     "peerDependencies": {
         "vue": "^3.0.0"
