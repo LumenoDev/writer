@@ -9,6 +9,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        run: npm install
 
-      - name: Run Jest
-        uses: stefanoeb/jest-action@1.0.2
+      - name: Run tests
+        run: npm run test
