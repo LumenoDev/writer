@@ -14,16 +14,14 @@
 
     <!-- Styles -->
     <style>
-
+        #app { margin: 70px }
     </style>
 
 </head>
 <body>
 
     <!-- Entrypoint -->
-    <div id="app">
-        <Writer></Writer>
-    </div>
+    <div id="app"></div>
 
     <!-- Setup -->
     <script type="module">
@@ -32,9 +30,10 @@
 
         let config = {
             components : { Writer },
+            template   : `<Writer v-model="text"></Writer>`,
             data() {
                 return {
-                    text : 'Writer - The minimal, Markdown editor.',
+                    text : 'Welcome to Writer, the minimal, markdown editor with code syntax highlighting!',
                 }
             },
         }
