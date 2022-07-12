@@ -13,6 +13,7 @@
 
                 <!-- Heading #1 -->
                 <div title="Heading #1"
+                     @click="insertText('# ')"
                      class="toolbar-button toolbar-button-heading toolbar-button-heading-one flex items-center cursor-pointer p-3 group">
 
                     <!-- Icon -->
@@ -29,6 +30,7 @@
 
                 <!-- Heading #2 -->
                 <div title="Heading #2"
+                     @click="insertText('## ')"
                      class="toolbar-button toolbar-button-heading toolbar-button-heading-two flex items-center cursor-pointer p-3 group">
 
                     <!-- Icon -->
@@ -45,6 +47,7 @@
 
                 <!-- Heading #3 -->
                 <div title="Heading #3"
+                     @click="insertText('### ')"
                      class="toolbar-button toolbar-button-heading toolbar-button-heading-three flex items-center cursor-pointer p-3 group">
 
                     <!-- Icon -->
@@ -219,6 +222,7 @@
                       :value="modelValue"
                       :placeholder="placeholder"
                       @input="change($event.target.value)"
+                      @focusout="saveSelectionRange($event.target)"
                       class="editor appearance-none outline-none focus:outline-none active:outline-none bg-inherit w-full text-gray-900 resize-none font-mono p-6">
             </textarea>
 
@@ -246,6 +250,11 @@ export default
     data() { return {
         editing    : true,
         fullscreen : false,
+
+        selection : {
+            start : 0,
+            end   : 0,
+        },
     }},
 
     /**
@@ -310,6 +319,18 @@ export default
         },
 
         /**
+         * Store the current cursor selection range.
+         *
+         */
+        saveSelectionRange(target)
+        {
+            this.selection = {
+                start : target.selectionStart,
+                end   : target.selectionEnd,
+            };
+        },
+
+        /**
          * Adjust the textarea to fit its content.
          *
          */
@@ -318,7 +339,7 @@ export default
             if (this.fullscreen) return;
 
             this.$refs.editor.style.height = `${this.$refs.editor.scrollHeight}px`;
-        }
+        },
     }
 }
 </script>
