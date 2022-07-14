@@ -1,6 +1,6 @@
-<!-- Header -->
+<!-- Screenshot -->
 <p align="center">
-    <img src="resources/header.png" alt="Header" />
+    <img src="resources/screenshot.png" alt="Screenshot" />
 </p>
 
 <!-- Badges -->
@@ -82,7 +82,8 @@ Next, within the `uploadImage` method (or whatever you provided), you should exe
         :progress="status"
         @upload="uploadImage($event)">
 </Writer>
-
+```
+```js
 let status = 0;
 
 function uploadImage(hook)
@@ -158,10 +159,6 @@ If you wish to customize the styling that is used when the `darkMode` prop is se
 ## Contributing
 
 Thank you for considering a contribution to Writer. You are welcome to submit a PR containing improvements. Note that while the package is still under development, PRs do not require tests (although they are certainly welcome). Once an initial version is released, all future PRs will require tests to be accepted.
-
-## Credits
-
-Quill icon by [Vectors Market](https://www.flaticon.com/free-icon/quill_234628).
 
 ## License
 
