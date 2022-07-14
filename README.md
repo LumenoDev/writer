@@ -48,10 +48,10 @@ data() {
 
 Writer is designed to require minimal, even zero-configuration. However, should you use wish to customize it, then you can do so using the following `props`:
 
-| Name        | Type   | Summary                                                                 |
-| ----------- | ------ | ----------------------------------------------------------------------- |
-| height      | Number | Set the minimum height of the component in pixels (default is 200)      |
-| placeholder | String | Set the default placeholder text to display when the component is empty |
+| Name        | Type   | Summary                                                                      |
+| ----------- | ------ | ---------------------------------------------------------------------------- |
+| height      | Number | Set the minimum height in pixels (default is 300, less may create UI quirks) |
+| placeholder | String | Set the default placeholder text to display when the component is empty      |
 
 ### Styling
 
