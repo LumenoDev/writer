@@ -1,19 +1,11 @@
+# Writer
+
+This package contains a minimal, Markdown editor with preview support as well as code syntax highlighting. It was extracted and refined from an original implementation used by [Lumeno](https://lumeno.dev). It is currently a work-in-progress and is under development.
+
 <!-- Screenshot -->
 <p align="center">
     <img src="resources/screenshot.png" alt="Screenshot" />
 </p>
-
-<!-- Badges -->
-<p align="center">
-    <img src="https://img.shields.io/npm/v/@lumeno/writer.svg" alt="Latest Release" />
-    <img src="https://img.shields.io/npm/l/@lumeno/writer.svg" alt="License" />
-</p>
-
-<!-- Update badges -->
-
-# Writer
-
-This package contains a minimal, Markdown editor with preview support as well as code syntax highlighting. It was extracted and refined from an original implementation used by [Lumeno](https://lumeno.dev). It is currently a work-in-progress and is under development.
 
 ## Installation
 
