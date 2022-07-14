@@ -1,6 +1,6 @@
 # Writer
 
-This package contains a minimal, Markdown editor with preview support as well as code syntax highlighting. It was extracted and refined from an original implementation used by [Lumeno](https://lumeno.dev). It is currently a work-in-progress and is under development.
+This package contains a minimal, Markdown editor with preview support as well as code syntax highlighting. It was extracted and refined from an original Vue component used by [Lumeno](https://lumeno.dev). It is currently a work-in-progress and is under development.
 
 <!-- Screenshot -->
 <p align="center">
