@@ -12,11 +12,11 @@
                  :class="editing ? '' : 'invisible pointer-events-none'">
 
                 <!-- Undo -->
-                <div class="toolbar-button toolbar-button-undo flex items-center p-3">
+                <div title="Undo"
+                     class="toolbar-button toolbar-button-undo flex items-center p-3">
 
                     <!-- Icon -->
-                    <svg title="Undo"
-                         viewBox="0 0 512 512"
+                    <svg viewBox="0 0 512 512"
                          @click="history.hasUndo() ? history.undo() : null"
                          class="h-[16px] fill-current cursor-pointer transition duration-300"
                          :class="history.hasUndo() ? 'text-black hover:text-sky-700' : 'text-gray-300'">
@@ -29,11 +29,11 @@
                 </div>
 
                 <!-- Redo -->
-                <div class="toolbar-button toolbar-button-redo flex items-center p-3">
+                <div title="Redo"
+                     class="toolbar-button toolbar-button-redo flex items-center p-3">
 
                     <!-- Icon -->
-                    <svg title="Redo"
-                         viewBox="0 0 512 512"
+                    <svg viewBox="0 0 512 512"
                          @click="history.hasRedo() ? history.redo() : null"
                          class="h-[16px] fill-current cursor-pointer transition duration-300"
                          :class="history.hasRedo() ? 'text-black hover:text-sky-700' : 'text-gray-300'">
@@ -49,11 +49,11 @@
                 <div class="toolbar-divider border-l border-gray-300/70 mx-3"></div>
 
                 <!-- Headings -->
-                <div class="toolbar-button toolbar-button-headings flex items-center p-3 relative">
+                <div title="Headings"
+                     class="toolbar-button toolbar-button-headings flex items-center p-3 relative">
 
                     <!-- Icon -->
-                    <svg title="Headings"
-                         viewBox="0 0 448 512"
+                    <svg viewBox="0 0 448 512"
                          @click="headings = ! headings"
                          class="h-[16px] min-w-[16px] fill-current cursor-pointer transition duration-300 text-black hover:text-sky-700">
 
@@ -65,36 +65,61 @@
                     <!-- Headings -->
                     <div ref="headings"
                          v-if="headings"
+                         @click="headings = false"
                          class="headings absolute py-4 bg-white border border-gray-300 border-t-0 rounded-b-md top-[41px] -left-[13px] whitespace-nowrap cursor-default">
 
                         <!-- Heading #1 -->
-                        <h1 class="text-[25px] px-6 py-1 mb-1 font-bold cursor-pointer transition duration-300 hover:bg-gray-100">
+                        <h1 @click="prependText('\n\n# ')"
+                            class="text-[25px] px-6 py-1 mb-1 font-bold cursor-pointer transition duration-300 hover:bg-gray-100">
+
+                            <!-- Text -->
                             Heading One
+
                         </h1>
 
                         <!-- Heading #1 -->
-                        <h2 class="text-[23px] px-6 py-1 mb-1 font-bold cursor-pointer transition duration-300 hover:bg-gray-100">
+                        <h2 @click="prependText('\n\n## ')"
+                            class="text-[23px] px-6 py-1 mb-1 font-bold cursor-pointer transition duration-300 hover:bg-gray-100">
+
+                            <!-- Text -->
                             Heading Two
+
                         </h2>
 
                         <!-- Heading #1 -->
-                        <h3 class="text-[21px] px-6 py-1 mb-1 font-semibold cursor-pointer transition duration-300 hover:bg-gray-100">
+                        <h3 @click="prependText('\n\n### ')"
+                            class="text-[21px] px-6 py-1 mb-1 font-semibold cursor-pointer transition duration-300 hover:bg-gray-100">
+
+                            <!-- Text -->
                             Heading Three
+
                         </h3>
 
                         <!-- Heading #1 -->
-                        <h4 class="text-[19px] px-6 py-1 mb-1 font-semibold cursor-pointer transition duration-300 hover:bg-gray-100">
+                        <h4 @click="prependText('\n\n#### ')"
+                            class="text-[19px] px-6 py-1 mb-1 font-semibold cursor-pointer transition duration-300 hover:bg-gray-100">
+
+                            <!-- Text -->
                             Heading Four
+
                         </h4>
 
                         <!-- Heading #1 -->
-                        <h5 class="text-[17px] px-6 py-1 mb-1 font-medium cursor-pointer transition duration-300 hover:bg-gray-100">
+                        <h5 @click="prependText('\n\n##### ')"
+                            class="text-[17px] px-6 py-1 mb-1 font-medium cursor-pointer transition duration-300 hover:bg-gray-100">
+
+                            <!-- Text -->
                             Heading Five
+
                         </h5>
 
                         <!-- Heading #1 -->
-                        <h6 class="text-[15px] px-6 py-1 font-medium cursor-pointer transition duration-300 hover:bg-gray-100">
+                        <h6 @click="prependText('\n\n###### ')"
+                            class="text-[15px] px-6 py-1 font-medium cursor-pointer transition duration-300 hover:bg-gray-100">
+
+                            <!-- Text -->
                             Heading Six
+
                         </h6>
 
                     </div>
@@ -102,11 +127,12 @@
                 </div>
 
                 <!-- Bold -->
-                <div class="toolbar-button toolbar-button-bold flex items-center p-3">
+                <div title="Bold"
+                     class="toolbar-button toolbar-button-bold flex items-center p-3">
 
                     <!-- Icon -->
-                    <svg title="Bold"
-                         viewBox="0 0 384 512"
+                    <svg viewBox="0 0 384 512"
+                         @click="wrapText('**')"
                          class="h-[16px] fill-current cursor-pointer transition duration-300 text-black hover:text-sky-700">
 
                         <!-- Graphic -->
@@ -117,11 +143,12 @@
                 </div>
 
                 <!-- Italic -->
-                <div class="toolbar-button toolbar-button-italic flex items-center p-3">
+                <div title="Italic"
+                     class="toolbar-button toolbar-button-italic flex items-center p-3">
 
                     <!-- Icon -->
-                    <svg title="Italic"
-                         viewBox="0 0 384 512"
+                    <svg viewBox="0 0 384 512"
+                         @click="wrapText('*')"
                          class="h-[16px] fill-current cursor-pointer transition duration-300 text-black hover:text-sky-700">
 
                         <!-- Graphic -->
@@ -132,11 +159,12 @@
                 </div>
 
                 <!-- List -->
-                <div class="toolbar-button toolbar-button-list flex items-center p-3">
+                <div title="List"
+                     class="toolbar-button toolbar-button-list flex items-center p-3">
 
                     <!-- Icon -->
-                    <svg title="List"
-                         viewBox="0 0 512 512"
+                    <svg viewBox="0 0 512 512"
+                         @click="prependText('\n\n* ')"
                          class="h-[16px] fill-current cursor-pointer transition duration-300 text-black hover:text-sky-700">
 
                         <!-- Graphic -->
@@ -150,11 +178,12 @@
                 <div class="toolbar-divider border-l border-gray-300/70 mx-3"></div>
 
                 <!-- Blockquote -->
-                <div class="toolbar-button toolbar-button-blockquote flex items-center p-3">
+                <div title="Blockquote"
+                     class="toolbar-button toolbar-button-blockquote flex items-center p-3">
 
                     <!-- Icon -->
-                    <svg title="Blockquote"
-                         viewBox="0 0 448 512"
+                    <svg viewBox="0 0 448 512"
+                         @click="prependText('\n\n> ')"
                          class="h-[16px] fill-current cursor-pointer transition duration-300 text-gray-400 hover:text-sky-700">
 
                         <!-- Graphic -->
@@ -165,11 +194,12 @@
                 </div>
 
                 <!-- Code -->
-                <div class="toolbar-button toolbar-button-code flex items-center p-3">
+                <div title="Code"
+                     class="toolbar-button toolbar-button-code flex items-center p-3">
 
                     <!-- Icon -->
-                    <svg title="Code"
-                         viewBox="0 0 640 512"
+                    <svg viewBox="0 0 640 512"
+                         @click="insertCodeBlock()"
                          class="h-[16px] fill-current cursor-pointer transition duration-300 text-emerald-600 hover:text-emerald-700">
 
                         <!-- Graphic -->
@@ -180,11 +210,12 @@
                 </div>
 
                 <!-- Link -->
-                <div class="toolbar-button toolbar-button-link flex items-center p-3">
+                <div title="Insert Link"
+                     class="toolbar-button toolbar-button-link flex items-center p-3">
 
                     <!-- Icon -->
-                    <svg title="Insert Link"
-                         viewBox="0 0 640 512"
+                    <svg viewBox="0 0 640 512"
+                         @click="wrapText(['[', '](url)'])"
                          class="h-[16px] fill-current cursor-pointer transition duration-300 text-sky-600 hover:text-sky-700">
 
                         <!-- Graphic -->
@@ -195,11 +226,11 @@
                 </div>
 
                 <!-- Image -->
-                <div class="toolbar-button toolbar-button-image flex items-center p-3">
+                <div title="Upload Image"
+                     class="toolbar-button toolbar-button-image flex items-center p-3">
 
                     <!-- Icon -->
-                    <svg title="Upload Image"
-                         viewBox="0 0 512 512"
+                    <svg viewBox="0 0 512 512"
                          class="h-[16px] fill-current cursor-pointer transition duration-300 text-purple-700/60 hover:text-purple-800">
 
                         <!-- Graphic -->
@@ -220,12 +251,12 @@
                 </div>
 
                 <!-- Edit -->
-                <div v-if="! editing"
+                <div title="Edit"
+                     v-if="! editing"
                      class="toolbar-button toolbar-button-edit flex items-center p-3">
 
                     <!-- Icon -->
-                    <svg title="Edit"
-                         viewBox="0 0 512 512"
+                    <svg viewBox="0 0 512 512"
                          @click="editing = true"
                          class="h-[16px] fill-current cursor-pointer transition duration-300 text-sky-600 hover:text-sky-800">
 
@@ -238,11 +269,11 @@
 
                 <!-- Preview -->
                 <div v-if="editing"
+                     title="Preview HTML"
                      class="toolbar-button toolbar-button-preview flex items-center p-3">
 
                     <!-- Icon -->
-                    <svg title="Preview HTML"
-                         viewBox="0 0 576 512"
+                    <svg viewBox="0 0 576 512"
                          @click="editing = false"
                          class="h-[16px] fill-current cursor-pointer transition duration-300 text-emerald-600 hover:text-emerald-800">
 
@@ -254,12 +285,12 @@
                 </div>
 
                 <!-- Fullscreen -->
-                <div v-if="! fullscreen"
+                <div title="Fullscreen"
+                     v-if="! fullscreen"
                      class="toolbar-button toolbar-button-fullscreen flex items-center p-3">
 
                     <!-- Icon -->
-                    <svg title="Fullscreen"
-                         viewBox="0 0 512 512"
+                    <svg viewBox="0 0 512 512"
                          @click="fullScreenMode()"
                          class="h-[16px] fill-current cursor-pointer transition duration-300 text-gray-500 hover:text-gray-800">
 
@@ -272,12 +303,12 @@
 
                 <!-- Compact -->
                 <div v-if="fullscreen"
+                     title="Exit Fullscreen"
                      class="toolbar-button toolbar-button-compact flex items-center p-3">
 
                     <!-- Icon -->
                     <svg viewBox="0 0 512 512"
                          @click="compactMode()"
-                         title="Exit Fullscreen"
                          class="h-[16px] fill-current cursor-pointer transition duration-300 text-gray-500 hover:text-gray-800">
 
                         <!-- Graphic -->
@@ -427,19 +458,37 @@ export default
          */
         interceptKeystroke(event)
         {
-            // Undo
-            if (event.keyCode === 90 && ! event.shiftKey && this.history.hasUndo()) {
-                event.preventDefault();
+            let shift   = event.shiftKey;
+            let command = event.ctrlKey || event.metaKey;
 
-                this.history.undo();
+            // Undo
+            if (event.key === 'z' && command && ! shift) {
+                if (this.history.hasUndo()) {
+                    event.preventDefault();
+
+                    this.history.undo();
+                }
             }
 
             // Redo
-            if ((event.keyCode === 89 || (event.keyCode === 90 && event.shiftKey)) && this.history.hasRedo()) {
-                event.preventDefault();
+            if (['z', 'y'].includes(event.key) && command && shift) {
+                if (this.history.hasRedo()) {
+                    event.preventDefault();
 
-                this.history.redo();
+                    this.history.redo();
+                }
             }
+        },
+
+        /**
+         * Wrap the currently selected text within a code block.
+         *
+         */
+        insertCodeBlock()
+        {
+            let language = prompt("Specify the language e.g. 'js', 'php', 'json' etc.", '')
+
+            this.wrapText(['\n\n```' + `${language}\n`, '\n```\n\n']);
         },
 
         /**
@@ -457,15 +506,17 @@ export default
         },
 
         /**
-         * Store the current cursor selection range.
+         * Insert the given content before the current selection.
          *
          */
-        saveSelectionRange(target)
+        prependText(content)
         {
-            this.selection = {
-                start : target.selectionStart,
-                end   : target.selectionEnd,
-            };
+            let preceeding = this.modelValue.substring(0, this.selection.start);
+            let succeeding = this.modelValue.substring(this.selection.start, this.modelValue.length);
+
+            this.change(`${preceeding}${content}${succeeding}`);
+
+            this.setSelectionRange(this.selection.start + content.length);
         },
 
         /**
@@ -480,6 +531,29 @@ export default
         },
 
         /**
+         * Store the current cursor selection range.
+         *
+         */
+        saveSelectionRange(target)
+        {
+            this.selection = {
+                start : target.selectionStart,
+                end   : target.selectionEnd,
+            };
+        },
+
+        /**
+         * Adjust the currently selected text in the editor.
+         *
+         */
+        setSelectionRange(start, finish = null)
+        {
+            this.$refs.editor.focus();
+
+            setTimeout(() => this.$refs.editor.setSelectionRange(start, finish ?? start), 50);
+        },
+
+        /**
          * Update the current height and content of the component.
          *
          */
@@ -488,6 +562,23 @@ export default
             this.resizeEditorToContent();
 
             this.$emit('update:modelValue', content);
+        },
+
+        /**
+         * Wrap the currently selected text with the given content.
+         *
+         */
+        wrapText(content)
+        {
+            content = Array.isArray(content) ? content : [content, content];
+
+            let preceeding = this.modelValue.substring(0, this.selection.start);
+            let selected   = this.modelValue.substring(this.selection.start, this.selection.end);
+            let succeeding = this.modelValue.substring(this.selection.end, this.modelValue.length);
+
+            this.change(`${preceeding}${content[0]}${selected}${content[1]}${succeeding}`);
+
+            this.setSelectionRange(this.selection.end + content.join('').length);
         },
     }
 }
