@@ -15,6 +15,7 @@
     <!-- Styles -->
     <style>
         #app { margin: 70px }
+        .writer .content .preview img { width: 70% }
     </style>
 
 </head>
@@ -28,42 +29,43 @@
         import { Writer } from './src/index.js';
         import { createApp } from 'vue/dist/vue.esm-bundler.js';
 
-        let config = {
-            components : { Writer },
-            template   : `
-                <Writer v-model="text"
-                        :uploads="true"
-                        :darkMode="false"
-                        :progress="progress"
-                        @upload="upload($event)">
-                </Writer>
-            `,
-            data() {
-                return {
-                    progress : 0,
-                    text     : 'Welcome to Writer, the minimal, markdown editor with code syntax highlighting!',
-                }
-            },
-            methods : {
-                upload(hook)
-                {
-                    setTimeout(() => this.progress = 10, 100);
-                    setTimeout(() => this.progress = 20, 200);
-                    setTimeout(() => this.progress = 30, 300);
-                    setTimeout(() => this.progress = 40, 400);
-                    setTimeout(() => this.progress = 50, 500);
-                    setTimeout(() => this.progress = 60, 600);
-                    setTimeout(() => this.progress = 70, 700);
-                    setTimeout(() => this.progress = 80, 800);
-                    setTimeout(() => this.progress = 90, 900);
-                    setTimeout(() => this.progress = 100, 1000);
+        fetch('README.md')
+            .then(response => response.text())
+            .then(content => createVueApp(content));
 
-                    setTimeout(() => hook('https://example.com/test.jpg'), 1500);
+        function createVueApp(content)
+        {
+            let config = {
+                components : { Writer },
+                template   : `
+                    <Writer :html="true"
+                            v-model="text"
+                            :uploads="true"
+                            :darkMode="false"
+                            :progress="progress"
+                            @upload="upload($event)">
+                    </Writer>
+                `,
+                data() {
+                    return {
+                        progress : 0,
+                        text     : content,
+                    }
+                },
+                methods : {
+                    upload(hook)
+                    {
+                        [10, 20, 30, 40, 50, 60, 70, 80, 90, 100].forEach(
+                            step => setTimeout(() => this.progress = step, step * 10)
+                        );
+
+                        setTimeout(() => hook('https://example.com/test.jpg'), 1500);
+                    }
                 }
             }
-        }
 
-        createApp(config).mount('#app');
+            createApp(config).mount('#app');
+        }
     </script>
 
 </body>

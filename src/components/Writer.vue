@@ -385,8 +385,9 @@
             </textarea>
 
             <!-- Preview -->
-            <div v-show="! editing"
-                 class="preview p-6 overflow-scroll rounded-b">
+            <div ref="preview"
+                 v-show="! editing"
+                 class="preview custom p-6 overflow-scroll rounded-b">
 
                 <!-- Slot -->
 
@@ -399,6 +400,7 @@
 
 <!-- Script -->
 <script>
+import markdownit from 'markdown-it';
 import UndoManager from 'undo-manager';
 
 export default
@@ -408,17 +410,14 @@ export default
      *
      */
     data() { return {
-        history    : new UndoManager(),
         editing    : true,
-        headings   : false,
         fullscreen : false,
+        headings   : false,
+        history    : new UndoManager(),
         mode       : this.darkMode ? 'dark' : 'light',
+        renderer   : null,
+        selection  : { start : 0, end : 0 },
         step       : this.progress,
-
-        selection : {
-            start : 0,
-            end   : 0,
-        },
     }},
 
     /**
@@ -426,8 +425,8 @@ export default
      *
      */
     emits : [
-        'upload',
         'update:modelValue',
+        'upload',
     ],
 
     /**
@@ -438,6 +437,7 @@ export default
         'darkMode'     : { type : Boolean, default : false },
         'displayText'  : { type : String,  default : "Specify the display text e.g 'home'." },
         'height'       : { type : Number,  default : 300 },
+        'html'         : { type : Boolean, default : false },
         'languageText' : { type : String,  default : "Specify the language e.g. 'js', 'php', 'json' etc." },
         'linkText'     : { type : String,  default : "Specify the url e.g. 'https://google.com'." },
         'maxUndo'      : { type : Number,  default : 20 },
@@ -454,6 +454,17 @@ export default
     created()
     {
         this.history.setLimit(this.maxUndo);
+
+        this.initializeMarkdownRenderer();
+    },
+
+    /**
+     * Execute actions when the component is mounted to the DOM.
+     *
+     */
+    mounted()
+    {
+        this.resizeEditorToContent();
     },
 
     /**
@@ -462,6 +473,17 @@ export default
      */
     watch :
     {
+        /**
+         * Watch the 'editing' data attribute.
+         *
+         */
+        editing : function(current, previous)
+        {
+            if (current) return;
+
+            this.$refs.preview.innerHTML = this.renderer.render(this.modelValue);
+        },
+
         /**
          * Watch the 'progress' property.
          *
@@ -520,6 +542,22 @@ export default
         hideOverlays()
         {
             this.headings = false;
+        },
+
+        /**
+         * Configure and initialize the Markdown renderer.
+         *
+         */
+        initializeMarkdownRenderer()
+        {
+            let options = {
+                html        : this.html,
+                linkify     : true,
+                typographer : true,
+                quotes      : '“”‘’',
+            };
+
+            this.renderer = markdownit('commonmark', options).enable('table');
         },
 
         /**

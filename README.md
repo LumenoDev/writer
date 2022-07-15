@@ -42,6 +42,7 @@ Writer is designed to require minimal, even zero-configuration. However, should 
 | ------------ | ------- | ---------------------------------------------------------------------------- |
 | darkMode     | Boolean | Toggle whether the editor uses dark mode CSS styling (default is false)      |
 | height       | Number  | Set the minimum height in pixels (default is 300, less may create UI quirks) |
+| html         | Boolean | Enable or disable HTML tags (default is false for [security reasons](https://github.com/markdown-it/markdown-it/blob/master/docs/security.md)) |
 | maxUndo      | Number  | Set the maximum number of undo / redo operations (default is 20)             |
 | progress     | Number  | Set the percentage (0 - 100) on the image uploading progress bar             |
 | placeholder  | String  | Set the default placeholder text to display when the editor is empty         |
@@ -148,6 +149,10 @@ If you wish to customize the styling that is used when Writer is in dark mode, t
 ```css
 .writer.dark .toolbar .toolbar-button { }
 ```
+
+#### Rendered HTML
+
+Writer includes a minimal set of styles for the HTML that is rendered from the Markdown text. You are free to use this as-is (if it meets your needs), or you can create your own custom styles. If you wish to create your own, refer to the 'prose' section within the `src/index.css` file.
 
 ## Contributing
 

@@ -1,3 +1,57 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/**
+ * Prose - these styles are applied to the HTML that is rendered from
+ * the Markdown text. In order to override them, you should use CSS
+ * specificity to prefix your new styles with 'custom' like so:
+ *
+ * .writer .content .preview.custom h1 { }
+ *
+ */
+
+/* Light Mode */
+.writer .content .preview h1 { @apply text-[30px] text-black font-bold mb-7 }
+.writer .content .preview h2 { @apply text-[26px] text-black font-bold mb-6 }
+.writer .content .preview h3 { @apply text-[24px] text-black font-semibold mb-5 }
+.writer .content .preview h4 { @apply text-[22px] text-black font-semibold mb-4 }
+.writer .content .preview h5 { @apply text-[20px] text-black font-medium mb-3 }
+.writer .content .preview h6 { @apply text-[18px] text-black font-medium mb-3 }
+.writer .content .preview p { @apply text-[16px] text-black font-normal mb-6 }
+.writer .content .preview a { @apply text-sky-600 hover:text-rose-700 transition duration-300 }
+.writer .content .preview ol { @apply pl-11 list-decimal }
+.writer .content .preview ul { @apply pl-11 list-disc }
+.writer .content .preview li { @apply text-gray-700 leading-normal mb-2 first-of-type:mt-5 last-of-type:mb-6 }
+.writer .content .preview li a { @apply text-sky-600 hover:text-rose-700 }
+.writer .content .preview hr { @apply w-1/2 border-dashed border-gray-400 mx-auto my-12 md:my-16 }
+.writer .content .preview img { @apply my-12 }
+.writer .content .preview code { @apply bg-gray-200 font-mono text-[14px] rounded px-1 py-[2px] mx-1 }
+.writer .content .preview pre { @apply bg-gray-100 my-12 rounded p-6 }
+.writer .content .preview pre code { @apply bg-transparent }
+.writer .content .preview table { @apply my-12 w-full border-separate border-spacing-0 }
+.writer .content .preview table thead th { @apply table-cell align-middle text-[13px] font-bold uppercase text-gray-700 p-4 bg-gray-100 text-left border border-b-gray-400 border-l-0 border-r-0 border-t-gray-400 first-of-type:border-l first-of-type:border-l-gray-400 last-of-type:border-r last-of-type:border-r-gray-400 }
+.writer .content .preview table tbody tr td { @apply align-middle text-gray-700 p-4 table-cell border border-t-0 border-l-0 border-r-0 border-b-gray-300 first-of-type:border-l first-of-type:border-l-gray-400 last-of-type:border-r last-of-type:border-r-gray-400 }
+.writer .content .preview table tr:last-of-type td { @apply border-b-gray-400 }
+.writer .content .preview blockquote { @apply my-6 border-l-4 rounded-r px-6 py-5 bg-orange-100 border-yellow-500 }
+.writer .content .preview blockquote p { @apply mb-0 }
+
+/* Dark Mode */
+.writer.dark .content .preview h1 { @apply text-white }
+.writer.dark .content .preview h2 { @apply text-white }
+.writer.dark .content .preview h3 { @apply text-white }
+.writer.dark .content .preview h4 { @apply text-white }
+.writer.dark .content .preview h5 { @apply text-white }
+.writer.dark .content .preview h6 { @apply text-white }
+.writer.dark .content .preview p { @apply text-gray-400 }
+.writer.dark .content .preview a { @apply hover:text-rose-400 }
+.writer.dark .content .preview li { @apply text-gray-400 }
+.writer.dark .content .preview li a { @apply text-sky-600 hover:text-rose-400 }
+.writer.dark .content .preview hr { @apply border-gray-600 }
+.writer.dark .content .preview code { @apply bg-gray-700 }
+.writer.dark .content .preview pre { @apply bg-gray-700 text-gray-400 }
+.writer.dark .content .preview pre code { @apply bg-transparent }
+.writer.dark .content .preview table thead th { @apply bg-gray-700 text-white border-b-0 border-t-gray-500 first-of-type:border-l-gray-500 last-of-type:border-r-gray-500 }
+.writer.dark .content .preview table tbody tr td { @apply text-gray-400 border-b-gray-500 first-of-type:border-l-gray-500 last-of-type:border-r-gray-500 }
+.writer.dark .content .preview table tr:last-of-type td { @apply border-b-gray-500 }
+.writer.dark .content .preview blockquote { @apply bg-yellow-700 bg-opacity-50 border-yellow-600 }
