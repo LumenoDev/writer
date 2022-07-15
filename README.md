@@ -133,6 +133,7 @@ Writer includes a friendly set of styles that should be applicable to most appli
 .writer .toolbar .toolbar-right { }
 .writer .toolbar .toolbar-right .toolbar-button-edit { }
 .writer .toolbar .toolbar-right .toolbar-button-preview { }
+.writer .toolbar .toolbar-right .toolbar-button-mode { }
 .writer .toolbar .toolbar-right .toolbar-button-fullscreen { }
 .writer .toolbar .toolbar-right .toolbar-button-compact { }
 .writer .content { }
@@ -142,7 +143,7 @@ Writer includes a friendly set of styles that should be applicable to most appli
 .writer .content .progress .position { }
 ```
 
-If you wish to customize the styling that is used when the `darkMode` prop is set to `true`, then append the `.dark` class to the main `.writer` class e.g.
+If you wish to customize the styling that is used when Writer is in dark mode, then append the `.dark` class to the main `.writer` class e.g.
 
 ```css
 .writer.dark .toolbar .toolbar-button { }

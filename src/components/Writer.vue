@@ -1,7 +1,7 @@
 <!-- Template -->
 <template>
     <div class="writer flex flex-col"
-         :class="[darkMode ? 'dark' : '', fullscreen ? 'fullscreen fixed inset-0 z-1000' : '']">
+         :class="[mode, fullscreen ? 'fullscreen fixed inset-0 z-1000' : '']">
 
         <!-- Toolbar -->
         <div class="toolbar bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-none flex px-2"
@@ -287,6 +287,34 @@
 
                 </div>
 
+                <!-- Mode -->
+                <div class="toolbar-button toolbar-button-mode flex items-center p-3"
+                     :title="mode === 'light' ? 'Switch to dark mode' : 'Switch to light mode'">
+
+                    <!-- Light -->
+                    <svg viewBox="0 0 512 512"
+                         @click="mode = 'light'"
+                         v-show="mode === 'dark'"
+                         class="h-[16px] fill-current cursor-pointer transition duration-300 text-yellow-600 hover:text-yellow-400 dark:hover:text-white">
+
+                        <!-- Graphic -->
+                        <path d="m256 159.1c-53.02 0-95.1 42.98-95.1 95.1s41.2 96.9 95.1 96.9 95.1-42.98 95.1-95.1-42.1-96.9-95.1-96.9zm253.3 187.9-63.2-91.9 63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824l-91.004 64.044-91.9-63.154c-9.125-6.332-21.74-1.107-23.72 9.824l-18.78 109.04-109.04 19.7c-10.927 1.9-16.156 14.6-9.824 22.8l63.154 91.9-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7 19.7 109c1.975 10.93 14.59 16.16 23.72 9.824l91.016-63.154 91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109 109-19.7c10.97-1.928 16.17-14.628 9.87-23.728zm-253.3 36.1c-70.69 0-127.1-57.31-127.1-127.1 0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1c0 70.7-56.4 127.1-127.1 127.1z"/>
+
+                    </svg>
+
+                    <!-- Dark -->
+                    <svg viewBox="0 0 512 512"
+                         @click="mode = 'dark'"
+                         v-show="mode === 'light'"
+                         class="h-[16px] fill-current cursor-pointer transition duration-300 text-yellow-600 hover:text-yellow-800 dark:hover:text-white">
+
+                        <!-- Graphic -->
+                        <path d="m32 256c0-123.8 100.3-224 223.8-224 11.36 0 29.7 1.668 40.9 3.746 9.616 1.777 11.75 14.63 3.279 19.44-54.979 31.314-88.779 89.414-88.779 152.614 0 109.7 99.71 193 208.3 172.3 9.561-1.805 16.28 9.324 10.11 16.95-41.71 51.55-104.81 82.95-173.81 82.95-123.7 0-223.8-100.4-223.8-224z"/>
+
+                    </svg>
+
+                </div>
+
                 <!-- Fullscreen -->
                 <div title="Fullscreen"
                      v-if="! fullscreen"
@@ -384,6 +412,7 @@ export default
         editing    : true,
         headings   : false,
         fullscreen : false,
+        mode       : this.darkMode ? 'dark' : 'light',
         step       : this.progress,
 
         selection : {
